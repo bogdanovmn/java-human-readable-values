@@ -1,61 +1,73 @@
 package com.github.bogdanovmn.humanreadablevalues;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class FractionatedValue {
-	private final List<Fraction> fractions;
+	private final FractionSpecification specification;
 	private final long value;
 
-	public FractionatedValue(long value, List<Fraction> fractions) {
-		if (fractions.isEmpty()) {
-			throw new IllegalStateException("At least one fraction has been expected");
-		}
+	public FractionatedValue(long value, FractionSpecification specification) {
 		this.value = value;
-		this.fractions = fractions.stream()
-			.sorted(
-				Comparator.comparingLong(Fraction::getMinimalUnitsAmount)
-					.reversed()
-			).collect(Collectors.toList());
+		this.specification = specification;
 	}
 
-	public final String fullView() {
-		List<String> result = new ArrayList<>();
+	public String fullString() {
+		return allFractions().stream()
+			.map(fraction ->
+				String.format("%d%s",
+					fraction.value(),
+					fraction.definition().shortNotation()
+				)
+			)
+			.collect(Collectors.joining(" "));
+	}
+
+	public final List<Fraction> allFractions() {
+		List<Fraction> result = new ArrayList<>();
 		long currentValue = value;
-		for (Fraction fraction : fractions) {
-			long fractionValue = currentValue / fraction.getMinimalUnitsAmount();
+		for (FractionDefinition fractionDefinition : specification.definitions()) {
+			long fractionValue = currentValue / fractionDefinition.minimalUnitsAmount();
 			if (fractionValue != 0) {
 				result.add(
-					String.format("%d%s", fractionValue, fraction.getShortNotation())
+					Fraction.builder()
+						.definition(fractionDefinition)
+						.value(fractionValue)
+					.build()
 				);
 			}
-			currentValue = value % fraction.getMinimalUnitsAmount();
+			currentValue = value % fractionDefinition.minimalUnitsAmount();
 			if (currentValue == 0) {
 				break;
 			}
 		}
-		return result.isEmpty()
-			? minimalValue()
-			: String.join(" ", result);
+		if (result.isEmpty()) {
+			result.add(
+				specification.minimalValue()
+			);
+		}
+		return result;
 	}
 
-	public final String shortView() {
-		for (Fraction fraction : fractions) {
-			long fractionValue = value / fraction.getMinimalUnitsAmount();
+	public String shortString() {
+		HighFractionValue highFraction = highFractionValue();
+		return String.format("%.1f%s", highFraction.value(), highFraction.definition().shortNotation());
+	}
+
+	public final HighFractionValue highFractionValue() {
+		for (FractionDefinition fractionDefinition : specification.definitions()) {
+			long fractionValue = value / fractionDefinition.minimalUnitsAmount();
 			if (fractionValue != 0) {
-				return String.format("%.1f%s", value / (1.0*fraction.getMinimalUnitsAmount()), fraction.getShortNotation());
+				return HighFractionValue.builder()
+					.definition(fractionDefinition)
+					.value(value / (1.0* fractionDefinition.minimalUnitsAmount()))
+				.build();
 			}
 		}
-		return minimalValue();
-	}
-
-	private String minimalValue() {
-		return String.format(
-			"0%s",
-			fractions.get(fractions.size() - 1)
-				.getShortNotation()
-		);
+		return HighFractionValue.builder()
+			.definition(specification.lowFractionDefinition())
+			.value(0)
+		.build();
 	}
 }

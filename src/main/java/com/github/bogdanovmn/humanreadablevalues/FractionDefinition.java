@@ -6,8 +6,9 @@ import lombok.Value;
 
 @Value
 @Builder
-class Fraction {
+public class FractionDefinition {
+	long minimalUnitsAmount;
 	@NonNull
-	FractionDefinition definition;
-	long value;
+	String shortNotation;
+	String name;
 }

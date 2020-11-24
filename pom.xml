@@ -6,9 +6,9 @@
 
 	<groupId>com.github.bogdanovmn.humanreadablevalues</groupId>
 	<artifactId>human-readable-values</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 
-	<name>java-common</name>
+	<name>Human Readable Values</name>
 	<description>This library helps producing human readable big values (bytes, seconds etc)</description>
 	<url>http://github.com/bogdanovmn/java-human-readable-values</url>
 
@@ -37,7 +37,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/bogdanovmn/java-human-readable-values.git</connection>
 		<developerConnection>scm:git:ssh://github.com:java-human-readable-values.git</developerConnection>
-		<url>http://github.com/java-human-readable-values</url>
+		<url>http://github.com/bogdanovmn/java-human-readable-values</url>
 	</scm>
 
 	<dependencies>
