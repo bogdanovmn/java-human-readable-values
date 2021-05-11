@@ -23,12 +23,12 @@ A small library that will help you to get convenient for analyzing values. For i
 ```java
 assertEquals(
 	"2h 46m 40s",
-	new TimeValue(10000).fullString()
+	new SecondsValue(10000).fullString()
 );
 
 assertEquals(
 	"2.8h",
-	new TimeValue(10000).shortString()
+	new SecondsValue(10000).shortString()
 );
 ```
 
