@@ -19,6 +19,18 @@ A small library that will help you to get convenient for analyzing values. For i
 ```
 
 ## 2. Print out your values
+### Milliseconds
+```java
+assertEquals(
+    "1h 1s 50ms",
+    new MillisecondsValue(3600_000 + 1050).fullString()
+);
+
+assertEquals(
+    "1.1s",
+    new MillisecondsValue(1050).shortString()
+);
+```
 ### Seconds
 ```java
 assertEquals(

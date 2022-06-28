@@ -6,7 +6,7 @@
 
 	<groupId>com.github.bogdanovmn.humanreadablevalues</groupId>
 	<artifactId>human-readable-values</artifactId>
-	<version>1.0.1</version>
+	<version>1.1.0</version>
 
 	<name>Human Readable Values</name>
 	<description>This library helps producing human readable big values (bytes, seconds etc)</description>

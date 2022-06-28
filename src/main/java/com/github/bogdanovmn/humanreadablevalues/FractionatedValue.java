@@ -2,6 +2,7 @@ package com.github.bogdanovmn.humanreadablevalues;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public abstract class FractionatedValue {
@@ -52,7 +53,7 @@ public abstract class FractionatedValue {
 
 	public String shortString() {
 		HighFractionValue highFraction = highFractionValue();
-		return String.format("%.1f%s", highFraction.value(), highFraction.definition().shortNotation());
+		return String.format(Locale.ROOT, "%.1f%s", highFraction.value(), highFraction.definition().shortNotation());
 	}
 
 	public final HighFractionValue highFractionValue() {
