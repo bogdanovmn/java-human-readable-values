@@ -6,7 +6,7 @@
 
 	<groupId>com.github.bogdanovmn.humanreadablevalues</groupId>
 	<artifactId>human-readable-values</artifactId>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 
 	<name>Human Readable Values</name>
 	<description>This library helps producing human readable big values (bytes, seconds etc)</description>
@@ -44,13 +44,13 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.12</version>
+			<version>1.18.24</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
